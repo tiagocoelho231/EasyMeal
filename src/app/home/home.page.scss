@@ -2,3 +2,12 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+ion-content.menu{
+  --ion-background-color: #c32d2d;
+}
+
+ion-menu ion-list ion-item{
+  color: #fff;
+  --ion-background-color: #c32d2d;
+}
