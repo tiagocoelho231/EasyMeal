@@ -10,6 +10,14 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
+  },
+  { 
+    path: 'conta', 
+    loadChildren: './conta/conta.module#ContaPageModule'
+  },
+  { 
+    path: 'favoritos',
+    loadChildren: './favoritos/favoritos.module#FavoritosPageModule'
   }
 ];
 
