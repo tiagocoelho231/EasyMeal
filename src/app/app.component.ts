@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['home/home.page.scss'],
+  styleUrls: ['pages/home/home.page.scss'],
 })
 export class AppComponent {
   public appPages = [
@@ -25,6 +25,11 @@ export class AppComponent {
       title: 'Favoritos',
       url: '/favoritos',
       icon: 'md-star'
+    },
+    {
+      title: 'Despensa',
+      url: '/despensa',
+      icon: 'ios-basket'
     }
   ];
 

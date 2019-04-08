@@ -9,16 +9,12 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
+    loadChildren: './pages/home/home.module#HomePageModule'
   },
-  { 
-    path: 'conta', 
-    loadChildren: './conta/conta.module#ContaPageModule'
-  },
-  { 
-    path: 'favoritos',
-    loadChildren: './favoritos/favoritos.module#FavoritosPageModule'
-  }
+  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
+  { path: 'conta', loadChildren: './pages/conta/conta.module#ContaPageModule' },
+  { path: 'despensa', loadChildren: './pages/despensa/despensa.module#DespensaPageModule' },
+  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
 ];
 
 @NgModule({
