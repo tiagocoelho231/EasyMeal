@@ -15,17 +15,6 @@
       <ion-card-title>EasyMeal</ion-card-title>
     </ion-card-header>
   </ion-card>
-  <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Resources</ion-label>
-    </ion-list-header>
-    <ion-item href="https://ionicframework.com/docs/components/">
-      <ion-label>Recursos do Ionic 4 <br><a>https://ionicframework.com/docs/components/</a></ion-label>
-    </ion-item>
-    <ion-item href="https://ionicframework.com/docs/v3/components/">
-      <ion-label>Recursos do Ionic 3 <br><a>https://ionicframework.com/docs/components/</a></ion-label>
-    </ion-item>
-  </ion-list>
   <div class="card-background-page">
     <ion-card *ngFor="let receita of receitas">
       <img src="{{ receita.imagem }}">
