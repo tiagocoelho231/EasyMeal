@@ -10,8 +10,8 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-ion-title {
-  background: var(--easymeal-background-color);
+ion-toolbar {
+  --ion-background-color: var(--easymeal-background-color);
   color: #FFF;
 }
 
