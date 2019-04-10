@@ -1,24 +1,19 @@
-<ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-menu-button></ion-menu-button>
-  </ion-buttons>
-  <ion-title>
-    Home
-  </ion-title>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Recomendações</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-card class="welcome-card">
-    <ion-img
-      src="https://img.stpu.com.br/?img=https://s3.amazonaws.com/pu-mgr/default/a0R0f00000xsvI6EAI/5ba38e95e4b0e8a409971a79.jpg&w=620&h=400">
-    </ion-img>
-    <ion-card-header>
-      <ion-card-title>EasyMeal</ion-card-title>
-    </ion-card-header>
-  </ion-card>
   <div class="card-background-page">
     <ion-card *ngFor="let receita of receitas">
       <img src="{{ receita.imagem }}">
-      <div class="card-title">{{ receita.nome }}</div>
+        <ion-card-header>
+          <ion-card-title>{{ receita.nome }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>{{ receita.descricao }}</ion-card-content>
     </ion-card>
   </div>
 </ion-content>

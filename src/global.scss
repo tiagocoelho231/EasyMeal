@@ -10,7 +10,36 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 
-ion-toolbar, ion-menu {
+ion-title {
+  background: var(--easymeal-background-color);
+  color: #FFF;
+}
+
+ion-menu-button { 
+  color: #FFF;
+}
+
+ion-menu {
     --ion-background-color: var(--easymeal-background-color);
-    color: #FFF;
+    //--ion-background-color: #c32d2d;
+
+    h1 {
+        font-size: 27px;
+        padding: 20px;
+        margin: 0;
+        color: #fff;
+    }
+
+    ion-list{
+        --ion-background-color:transparent;
+    }
+
+    ion-item {
+        color: #fff;
+        font-size:22px;
+    }
+
+    ion-icon {
+        font-size: 30px;
+    }
 }

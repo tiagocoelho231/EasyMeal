@@ -7,10 +7,7 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
-    path: 'home',
-    loadChildren: './pages/home/home.module#HomePageModule'
-  },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
   { path: 'conta', loadChildren: './pages/conta/conta.module#ContaPageModule' },
   { path: 'despensa', loadChildren: './pages/despensa/despensa.module#DespensaPageModule' },
