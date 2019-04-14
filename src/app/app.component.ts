@@ -27,6 +27,11 @@ export class AppComponent {
       icon: 'md-star'
     },
     {
+      title: 'Busca',
+      url: '/busca',
+      icon: 'search'
+    },
+    {
       title: 'Despensa',
       url: '/despensa',
       icon: 'ios-basket'

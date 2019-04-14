@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Receita {
-  nome: string; 
-  ingredientes: [];
+  nome: string;
+  ingredientes: object;
   preparo: string;
   imagem: string;
 }

@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'conta', loadChildren: './pages/conta/conta.module#ContaPageModule' },
   { path: 'despensa', loadChildren: './pages/despensa/despensa.module#DespensaPageModule' },
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
+  { path: 'busca', loadChildren: './pages/busca/busca.module#BuscaPageModule' },
 ];
 
 @NgModule({

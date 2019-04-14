@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Busca</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Insira os nomes dos ingredientes</ion-label>
+    <ion-input (input)="handleInputChange($event.target.value)"></ion-input>
+  </ion-item>
+
+  <ion-card *ngFor="let receita of busca">
+    <img src="{{ receita.imagem }}">
+    <ion-card-header>
+      <ion-card-title>{{ receita.nome }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{ receita.descricao }}</ion-card-content>
+  </ion-card>
+
+</ion-content>
