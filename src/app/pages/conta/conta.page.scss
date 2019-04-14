@@ -1,0 +1,45 @@
+.container{
+    width: 100%;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        margin-bottom: 30px;
+        width: 150px;
+        height: 150px;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+
+        ion-item {
+            --background: transparent;
+            --color: #000;
+            font-size: 20px;
+        }
+
+        ion-button {
+            width: auto;
+            margin-top: 10px;
+            padding: 0 40px;
+        }
+    }
+
+}
+
+    .back{
+        background-color: aqua;
+    }
+    .loginn{
+        text-align: center;
+        
+    }
+    ion-content{
+        --background: url('../../../assets/imagens/back.jpg') center / 100% auto no-repeat;
+        
+    }
+   

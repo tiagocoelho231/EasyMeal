@@ -3,10 +3,26 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Conta</ion-title>
+    <ion-title>Login do Faminto</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <div class="container">
+    <img src="../../../assets/imagens/logo.png" alt="Logo">
+    <div>
+        <ion-item>
+            <ion-label position="floating">Usuário</ion-label>
+            <ion-input fornControlName="email" type="email"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input fornControlName="password" type="password" ></ion-input>
+          </ion-item>
+          <ion-button color="primary">Entrar</ion-button>
+          <ion-button size="small" color="medium" >Esqueci minha senha</ion-button>
+    </div>
+
+  </div>
 
 </ion-content>
