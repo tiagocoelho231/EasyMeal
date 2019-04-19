@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 export interface Receita {
   nome: string;
-  ingredientes: object;
+  ingredientes: Array<String>;
   preparo: string;
   imagem: string;
 }
@@ -47,6 +47,10 @@ export class ReceitaService {
   }
 
   updateReceita(receita: Receita, id: string) {
+    return this.receitasColecao.doc(id).update(receita);
+  }
+
+  updateIngrediente(receita: Receita, id: string) {
     return this.receitasColecao.doc(id).update(receita);
   }
 

@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
   { path: 'conta', loadChildren: './pages/conta/conta.module#ContaPageModule' },
   { path: 'despensa', loadChildren: './pages/despensa/despensa.module#DespensaPageModule' },
-  { path: 'favoritos', loadChildren: './pages/favoritos/favoritos.module#FavoritosPageModule' },
+  { path: 'adicionar', loadChildren: './pages/adicionar-receita/adicionar-receita.module#AdicionarReceitaPageModule' },
+  { path: 'detalhes/:id', loadChildren: './pages/detalhes-receita/detalhes-receita.module#DetalhesReceitaPageModule' },
   { path: 'busca', loadChildren: './pages/busca/busca.module#BuscaPageModule' },
 ];
 

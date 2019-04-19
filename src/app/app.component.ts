@@ -35,6 +35,11 @@ export class AppComponent {
       title: 'Despensa',
       url: '/despensa',
       icon: 'ios-basket'
+    },
+    {
+      title: 'Adicionar receita',
+      url: '/adicionar',
+      icon: 'add-circle'
     }
   ];
 

@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content>
   <div class="card-background-page">
-    <ion-card *ngFor="let receita of receitas">
+    <ion-card *ngFor="let receita of receitas" [routerLink]="['/detalhes', receita.id]">
       <img src="{{ receita.imagem }}">
         <ion-card-header>
           <ion-card-title>{{ receita.nome }}</ion-card-title>
