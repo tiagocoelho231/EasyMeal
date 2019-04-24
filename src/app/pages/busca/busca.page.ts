@@ -16,9 +16,9 @@ export class BuscaPage implements OnInit {
 
   handleInputChange (value) {
     let resultado = this.receitas;
-    const buscados = value.split(' ');
+    const buscados = value.toLowerCase().split(' ');
     buscados.forEach(ingrediente => {
-      resultado = resultado.filter(receita => receita.ingredientes.hasOwnProperty(ingrediente));
+      resultado = resultado.filter(receita => receita.ingredientes.indexOf(ingrediente) > -1);
     });
     this.busca = resultado;
   }

@@ -42,7 +42,8 @@ export class DetalhesReceitaPage implements OnInit {
   }
 
   updateReceita() {
-    this.receitaService.updateReceita(this.receita, this.receitaId).then(() => {
+    const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
+    this.receitaService.updateReceita(receitaCorrigida, this.receitaId).then(() => {
       //console.log(this.receita.ingredientes);
       this.nav.navigateBack('home');
     })

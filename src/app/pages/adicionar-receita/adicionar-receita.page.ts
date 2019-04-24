@@ -35,7 +35,8 @@ export class AdicionarReceitaPage implements OnInit {
   }
   
   addReceita() {
-    this.receitaService.addReceita(this.receita);
+    const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
+    this.receitaService.addReceita(receitaCorrigida);
     this.nav.navigateBack('home');
   }
 
