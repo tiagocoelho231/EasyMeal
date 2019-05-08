@@ -10,18 +10,20 @@
   <div class="container">
     <img src="../../../assets/imagens/logo.png" alt="Logo">
     <div>
+      <form (ngSubmit)="login()">
         <ion-item>
-            <ion-label position="floating">Usuário</ion-label>
-            <ion-input fornControlName="email" type="email"></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label position="floating">Senha</ion-label>
-            <ion-input fornControlName="password" type="password" ></ion-input>
-          </ion-item>
-          <ion-button color="primary">Entrar</ion-button>
-          <ion-button size="small" color="medium" >Esqueci minha senha</ion-button>
-          <ion-button size="small" color="medium" >Crie a sua conta</ion-button>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input name="email" type="email" [(ngModel)]="formValue.email" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input name="password" type="password" [(ngModel)]="formValue.password" required></ion-input>
+        </ion-item>
+        <ion-button type="submit" color="primary">Entrar</ion-button>
+        <ion-button size="small" color="medium">Esqueci minha senha</ion-button>
+        <ion-button size="small" color="medium" (click)="goToCadastro()">Crie a sua conta</ion-button>
+      </form>
+
     </div>
 
   </div>
