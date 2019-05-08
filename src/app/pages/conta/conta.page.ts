@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
 
+
+
 @Component({
   selector: 'app-conta',
   templateUrl: './conta.page.html',
@@ -23,5 +25,8 @@ export class ContaPage implements OnInit {
       })
       .catch(error => window.alert(error.message));
   }
-
+  goToCadastro(){
+    this.nav.navigateBack('cadastro');
+  }
+    
 }
