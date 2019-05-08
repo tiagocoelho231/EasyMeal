@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'cadastro',
     pathMatch: 'full'
   },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'adicionar', loadChildren: './pages/adicionar-receita/adicionar-receita.module#AdicionarReceitaPageModule' },
   { path: 'detalhes/:id', loadChildren: './pages/detalhes-receita/detalhes-receita.module#DetalhesReceitaPageModule' },
   { path: 'busca', loadChildren: './pages/busca/busca.module#BuscaPageModule' },
+  { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
 ];
 
 @NgModule({
