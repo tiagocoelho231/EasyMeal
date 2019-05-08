@@ -1,9 +1,11 @@
 .container{
     width: 100%;
-    padding-top: 50px;
+    min-height: 100%;
+    padding: 50px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: url('../../../assets/imagens/back.jpg') bottom / cover no-repeat;
 
     img {
         margin-bottom: 30px;
@@ -11,7 +13,7 @@
         height: 150px;
     }
 
-    div {
+    > div {
         form {
             display: flex;
             flex-direction: column;
@@ -36,10 +38,6 @@
     }
     .loginn{
         text-align: center;
-        
-    }
-    ion-content{
-        --background: url('../../../assets/imagens/back.jpg') center / cover no-repeat;
         
     }
    
