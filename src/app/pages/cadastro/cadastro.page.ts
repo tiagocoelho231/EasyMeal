@@ -14,13 +14,14 @@ export class CadastroPage implements OnInit {
 
   ngOnInit() { }
 
-  login() {
+  signUp() {
     const { email, password, confirmPassword } = this.formValue;
     if (confirmPassword === password){
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(response => {
+        console.log(response);
         window.alert('Created successfully');
-        this.nav.navigateBack('conta')
+        // this.nav.navigateBack('conta')
       })
       .catch(error => window.alert(error.message));
     } else {

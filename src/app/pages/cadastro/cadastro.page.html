@@ -5,34 +5,25 @@
 </ion-header>
 
 <ion-content>
-  <div>
+  <form (ngSubmit)="signUp()">
     <ion-list lines="full">
-      <br>
-  
-
-        <ion-item>
-            <ion-label position="floating">Digite seu nome</ion-label> 
-            <ion-input  type="text"></ion-input>
-          </ion-item>
-            <br>
-            <ion-item>
-                <ion-label position="floating">Digite seu email</ion-label>
-                <ion-input [(ngModel)]="formValue.email" type="email"></ion-input>
-              </ion-item>
-            <br>
-              <ion-item>
-                <ion-label position="floating">Digite sua senha</ion-label>
-                <ion-input [(ngModel)]="formValue.password" type="password" ></ion-input>
-              </ion-item>
-              <br>
-              <ion-item>
-                  <ion-label position="floating">Repita sua senha</ion-label>
-                  <ion-input [(ngModel)]="formValue.confirmPassword" type="password" ></ion-input>
-                </ion-item>
-                <br>
-                <ion-button type="submmit" color="primary">Salvar</ion-button>
-
-         
-      </ion-list>
-    </div>
+      <ion-item>
+        <ion-label position="floating">Digite seu nome</ion-label> 
+        <ion-input type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Digite seu email</ion-label>
+        <ion-input [(ngModel)]="formValue.email" name="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Digite sua senha</ion-label>
+        <ion-input [(ngModel)]="formValue.password" name="password" type="password" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Repita sua senha</ion-label>
+        <ion-input [(ngModel)]="formValue.confirmPassword" name="confirmPassword" type="password" ></ion-input>
+      </ion-item>
+      <ion-button type="submit" color="primary">Salvar</ion-button>
+    </ion-list>
+  </form>
 </ion-content>
