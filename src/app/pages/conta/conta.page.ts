@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
-
-
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-conta',
@@ -20,13 +19,20 @@ export class ContaPage implements OnInit {
     const { email, password } = this.formValue;
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        window.alert('Logged in successfully');
+        console.log('Usuário logado');
         this.nav.navigateBack('home')
       })
       .catch(error => window.alert(error.message));
   }
-  goToCadastro(){
-    this.nav.navigateBack('cadastro');
+
+  ionViewWillEnter() {
+    firebase.auth().onAuthStateChanged((usuario) => {
+      if (usuario) {
+        console.log(usuario);
+        this.nav.navigateForward("conta-detalhes");
+      } else {
+        console.log("sem usuario");
+      }
+    });
   }
-    
 }

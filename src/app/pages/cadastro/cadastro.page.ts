@@ -20,12 +20,12 @@ export class CadastroPage implements OnInit {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(response => {
         console.log(response);
-        window.alert('Created successfully');
-        // this.nav.navigateBack('conta')
+        window.alert('Cadastrado com sucesso');
+        this.nav.navigateBack('conta')
       })
       .catch(error => window.alert(error.message));
     } else {
-      window.alert(`Passwords don't match`);
+      window.alert(`As senhas devem ser iguais`);
     }
   }
   

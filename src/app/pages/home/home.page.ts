@@ -17,6 +17,8 @@ export class HomePage implements OnInit{
     this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
       this.receitas = retorno;
     });
+
+    
   }
   
   ngOnDestroy() {
