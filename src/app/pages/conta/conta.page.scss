@@ -1,43 +1,38 @@
-.container{
-    width: 100%;
-    min-height: 100%;
-    padding: 50px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: url('../../../assets/imagens/back.jpg') bottom / cover no-repeat;
+.container {
+	width: 100%;
+	min-height: 100%;
+	padding: 50px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: url('../../../assets/imagens/back.jpg') bottom / cover no-repeat;
 
-    img {
-        margin-bottom: 30px;
-        width: 150px;
-        height: 150px;
-    }
+	img {
+		margin-bottom: 30px;
+		width: 150px;
+		height: 150px;
+	}
 
-    > div {
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+	> div {
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 
-            ion-item {
-                --background: transparent;
-                --color: #000;
-                font-size: 20px;
-            }
+			ion-item {
+				--background: transparent;
+				--color: #000;
+				font-size: 20px;
+				transition: background-color 0.3s;
 
-            ion-button {
-                margin-top: 10px;
-            }
-        }
-    }
+				&.item-has-focus {
+					background-color: rgba(255, 255, 255, 0.3);
+				}
+			}
 
+			ion-button {
+				margin-top: 10px;
+			}
+		}
+	}
 }
-
-    .back{
-        background-color: aqua;
-    }
-    .loginn{
-        text-align: center;
-        
-    }
-   

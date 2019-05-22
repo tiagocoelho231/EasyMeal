@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text="Voltar" defaultHref="home"></ion-back-button>
+      <ion-back-button text="" defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>Atualizar Receita</ion-title>
   </ion-toolbar>
@@ -18,11 +18,6 @@
   </ion-list>
   <ion-button expand="full" (click)="addInput()">Adicionar ingrediente</ion-button>
   <ion-button expand="full" (click)="removeInput()">Remover ingrediente</ion-button>
-  <ion-button expand="full" (click)="updateReceita()">Salvar</ion-button>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <ion-button expand="full" (click)="updateReceita()" class="salvar">Salvar</ion-button>
   <ion-button expand="full" (click)="removeReceita()">Remover receita</ion-button>
 </ion-content>
