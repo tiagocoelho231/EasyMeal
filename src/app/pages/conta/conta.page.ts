@@ -25,14 +25,4 @@ export class ContaPage implements OnInit {
       .catch(error => window.alert(error.message));
   }
 
-  ionViewWillEnter() {
-    firebase.auth().onAuthStateChanged((usuario) => {
-      if (usuario) {
-        console.log(usuario);
-        this.nav.navigateForward("conta-detalhes");
-      } else {
-        console.log("sem usuario");
-      }
-    });
-  }
 }

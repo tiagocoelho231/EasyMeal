@@ -32,13 +32,13 @@ export class DetalhesReceitaPage implements OnInit {
       this.loadReceita();
     }
   }
+  
   loadReceita() {
     this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
-
       this.receita = retorno;
       this.inputIngredientes = this.receita.ingredientes;
+      //console.log(this.inputIngredientes);
     })
-
   }
 
   updateReceita() {

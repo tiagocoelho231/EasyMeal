@@ -13,7 +13,7 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Conta',
-      url: '/conta',
+      url: '/conta-detalhes',
       icon: 'md-person'
     },
     {

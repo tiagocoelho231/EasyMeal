@@ -7,35 +7,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Default Item -->
-  <ion-item>
-    <ion-label>
-      Batata
-    </ion-label>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>
-      Beterraba
-    </ion-label>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>
-      Feijão
-    </ion-label>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>
-      Mamão
-    </ion-label>
-  </ion-item>
-  
-  <ion-item>
-    <ion-label>
-      Morango
-    </ion-label>
-  </ion-item>
+<ion-content padding>
+  <ion-list lines="full">
+    <ion-item *ngFor="let item of ingredientes; let i = index; trackBy: noRender">
+      <ion-input type="text" placeholder="Ingrediente {{ i+1 }}" [(ngModel)]="ingredientes[i]"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="full" (click)="addInput()">Adicionar ingrediente</ion-button>
+  <ion-button expand="full" (click)="removeInput()">Remover ingrediente</ion-button>
+  <ion-button expand="full" (click)="updateDespensa()">Salvar</ion-button>
 </ion-content>
