@@ -22,8 +22,8 @@ export class DespensaPage implements OnInit {
   };
   public ingredientes: any;
 
-  constructor(private nav: NavController, db: AngularFirestore) {
-    this.usuariosColecao = db.collection('usuarios');
+  constructor(private nav: NavController, private db: AngularFirestore) {
+    this.usuariosColecao = this.db.collection('usuarios');
   }
 
   ngOnInit() {
@@ -53,7 +53,8 @@ export class DespensaPage implements OnInit {
   }
 
   updateDespensa() {
-    firebase.firestore().collection('usuarios').doc(this.id).update(this.usuario);
+    const correctedUsuario = {...this.usuario, despensa: this.usuario.despensa.map(i => i.toLowerCase())};
+    firebase.firestore().collection('usuarios').doc(this.id).update(correctedUsuario);
   }
 
   addInput() {

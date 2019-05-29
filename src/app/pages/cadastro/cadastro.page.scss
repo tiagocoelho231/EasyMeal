@@ -1,13 +1,15 @@
 form {
 	width: 100%;
 	min-height: 100%;
-	padding: 50px 0;
+	padding: 50px 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	background: url('../../../assets/imagens/back.jpg') bottom / cover no-repeat;
 
 	ion-item {
+		max-width: 300px;
+		width: 100%;
 		--background: transparent;
 		--color: #000;
 		font-size: 20px;

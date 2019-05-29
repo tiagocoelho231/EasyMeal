@@ -20,7 +20,7 @@ export class ContaPage implements OnInit {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log('Usuário logado');
-        this.nav.navigateBack('home');
+        this.nav.navigateForward('home');
       })
       .catch(error => window.alert(error.message));
   }

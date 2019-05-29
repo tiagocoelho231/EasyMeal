@@ -14,6 +14,10 @@
 	}
 
 	> div {
+		width: 100%;
+		max-width: 340px;
+		padding: 0 20px;
+
 		form {
 			display: flex;
 			flex-direction: column;
@@ -22,6 +26,7 @@
 			ion-item {
 				--background: transparent;
 				--color: #000;
+				width: 100%;
 				font-size: 20px;
 				transition: background-color 0.3s;
 

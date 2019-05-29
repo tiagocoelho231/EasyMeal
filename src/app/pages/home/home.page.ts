@@ -1,4 +1,6 @@
 import { Receita, ReceitaService } from '../../../service/receita.service';
+import * as firebase from 'firebase';
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit{
   receitas: Receita[];
 
-  constructor(private receitaService: ReceitaService){}
+  constructor(private receitaService: ReceitaService, private nav: NavController){}
   
   private subscription;
 
@@ -17,9 +19,18 @@ export class HomePage implements OnInit{
     this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
       this.receitas = retorno;
     });
-
-    
   }
+
+  ionViewWillEnter() {
+		firebase.auth().onAuthStateChanged(usuario => {
+			if (usuario) {
+				// console.log(usuario);
+			} else {
+				console.log('Sem usuário');
+				this.nav.navigateForward('conta');
+			}
+		});
+	}
   
   ngOnDestroy() {
     this.subscription.unsubscribe();
