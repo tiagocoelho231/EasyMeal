@@ -1,7 +1,8 @@
-import { ReceitaService, Receita } from './../../../service/receita.service';
 import { Component, OnInit } from '@angular/core';
+import { Receita, ReceitaService } from 'src/service/receita.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-detalhes-receita',
@@ -18,9 +19,8 @@ export class DetalhesReceitaPage implements OnInit {
   receitaId = null;
   inputIngredientes: any;
 
-  noRender() {
-     //Impede o input de atualizar cada vez que um caractere é modificado
-  }
+  private id: any;
+  private admin: any;
 
   constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController) {
 
@@ -31,8 +31,22 @@ export class DetalhesReceitaPage implements OnInit {
     if (this.receitaId) {
       this.loadReceita();
     }
+
+    firebase.auth().onAuthStateChanged((usuario) => {
+      if (usuario) {
+        this.id = usuario.uid;
+
+        firebase.firestore().collection('usuarios').doc(this.id).get().then(resultado => {
+          this.admin = resultado.data().admin;
+          if (this.admin = true) {
+            this.nav.navigateForward("/detalhes-edit/" + this.receitaId);
+          }
+        })
+      }
+    });
+
   }
-  
+
   loadReceita() {
     this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
       this.receita = retorno;
@@ -41,27 +55,4 @@ export class DetalhesReceitaPage implements OnInit {
     })
   }
 
-  updateReceita() {
-    const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
-    this.receitaService.updateReceita(receitaCorrigida, this.receitaId).then(() => {
-      //console.log(this.receita.ingredientes);
-      this.nav.navigateBack('home');
-    })
-  }
-  
-  removeReceita() {
-    this.receitaService.removeReceita(this.receitaId).then(() => {
-      this.nav.navigateBack('home');
-    })
-  }
-
-  addInput() {
-    this.inputIngredientes.push('');
-    //console.log(this.inputIngredientes);
-  }
-
-  removeInput() {
-    this.inputIngredientes.pop();
-    //console.log(this.inputIngredientes);
-  }
 }

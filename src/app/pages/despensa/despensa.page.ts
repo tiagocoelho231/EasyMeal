@@ -4,7 +4,7 @@ import { NavController } from '@ionic/angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
 export interface Despensa {
-  ingredientes: Array<String>;
+  despensa: Array<String>;
 }
 
 
@@ -15,15 +15,15 @@ export interface Despensa {
 })
 export class DespensaPage implements OnInit {
 
-  private despensaColecao: AngularFirestoreCollection<Despensa>
+  private usuariosColecao: AngularFirestoreCollection<Despensa>
   private id: any;
-  private despensa: Despensa = {
-    ingredientes: ['']
+  private usuario: Despensa = {
+    despensa: ['']
   };
   public ingredientes: any;
 
   constructor(private nav: NavController, db: AngularFirestore) {
-    this.despensaColecao = db.collection('despensas');
+    this.usuariosColecao = db.collection('usuarios');
   }
 
   ngOnInit() {
@@ -38,22 +38,22 @@ export class DespensaPage implements OnInit {
   }
 
   loadDespensa(id: any) {
-    firebase.firestore().collection('despensas').doc(id).get().then(resultado => {
-      this.ingredientes = resultado.data().ingredientes;
+    firebase.firestore().collection('usuarios').doc(id).get().then(resultado => {
+      this.ingredientes = resultado.data().despensa;
 
-      this.despensaColecao.doc<Despensa>(id).valueChanges().subscribe(retorno => {
-        this.despensa = retorno;
-        this.ingredientes = this.despensa.ingredientes;
+      this.usuariosColecao.doc<Despensa>(id).valueChanges().subscribe(retorno => {
+        this.usuario = retorno;
+        this.ingredientes = this.usuario.despensa;
       })
     }).catch(() => {
-      firebase.firestore().collection('despensas').doc(id).set(this.despensa).then(() => {
+      firebase.firestore().collection('usuarios').doc(id).set(this.usuario).then(() => {
         location.reload();
       })
     })
   }
 
   updateDespensa() {
-    firebase.firestore().collection('despensas').doc(this.id).update(this.despensa);
+    firebase.firestore().collection('usuarios').doc(this.id).update(this.usuario);
   }
 
   addInput() {

@@ -10,19 +10,10 @@
 <ion-content padding>
   <ion-list lines="full">
     <ion-item>
-      <ion-input type="text" placeholder="Nome" [(ngModel)]="receita.nome"></ion-input>
+      <ion-label [innerHTML]="receita.nome"></ion-label>
     </ion-item>
-    <ion-item *ngFor="let ingrediente of inputIngredientes; let i = index;  trackBy: noRender" >
-      <ion-input type="text" placeholder="Ingrediente {{ i+1 }}" [(ngModel)]="receita.ingredientes[i]" ></ion-input>
+    <ion-item *ngFor="let ingrediente of inputIngredientes; let i = index" >
+      <ion-label [innerHTML]="receita.ingredientes[i]" ></ion-label>
     </ion-item>
   </ion-list>
-  <ion-button expand="full" (click)="addInput()">Adicionar ingrediente</ion-button>
-  <ion-button expand="full" (click)="removeInput()">Remover ingrediente</ion-button>
-  <ion-button expand="full" (click)="updateReceita()">Salvar</ion-button>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <ion-button expand="full" (click)="removeReceita()">Remover receita</ion-button>
 </ion-content>
