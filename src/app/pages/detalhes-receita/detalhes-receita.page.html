@@ -10,10 +10,10 @@
 <ion-content padding>
   <ion-list lines="full">
     <ion-item>
-      <ion-label [innerHTML]="receita.nome"></ion-label>
+      <ion-label>{{receita.nome}}</ion-label>
     </ion-item>
     <ion-item *ngFor="let ingrediente of inputIngredientes; let i = index" >
-      <ion-label [innerHTML]="receita.ingredientes[i]" ></ion-label>
+      <ion-label>{{receita.ingredientes[i]}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

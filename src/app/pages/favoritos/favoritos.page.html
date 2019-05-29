@@ -9,11 +9,12 @@
 
 <ion-content>
   <div class="card-background-page">
-    <ion-card>
-      <img src="https://www.laylita.com/receitas/wp-content/uploads/2018/06/Receita-de-brigadeiro-tradicional.jpg">
-        <ion-card-header>
-          <ion-card-title>Brigadeiro</ion-card-title>
-        </ion-card-header>
+    <ion-card *ngFor="let receita of show" [routerLink]="['/detalhes', receita.id]">
+      <img src="{{ receita.imagem }}">
+      <ion-card-header>
+        <ion-card-title>{{ receita.nome }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{ receita.descricao }}</ion-card-content>
     </ion-card>
   </div>
 </ion-content>
