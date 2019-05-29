@@ -38,7 +38,7 @@ export class DetalhesReceitaPage implements OnInit {
 
         firebase.firestore().collection('usuarios').doc(this.id).get().then(resultado => {
           this.admin = resultado.data().admin;
-          if (this.admin = true) {
+          if (this.admin) {
             this.nav.navigateForward("/detalhes-edit/" + this.receitaId);
           }
         })
