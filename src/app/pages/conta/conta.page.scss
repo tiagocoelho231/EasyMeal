@@ -17,11 +17,15 @@
 		width: 100%;
 		max-width: 340px;
 		padding: 0 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
 		form {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			margin-bottom: 20px;
 
 			ion-item {
 				--background: transparent;
