@@ -7,7 +7,7 @@
         </div>
         <ion-list lines="none"  class="my-ion-list"> 
           <ion-menu-toggle auto-hide="false" *ngFor="let page of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[page.url]">
+            <ion-item [routerDirection]="root" [routerLink]="[page.url]">
               <ion-icon slot="start" [name]="page.icon" color="light"></ion-icon>
               <ion-label>
                 {{page.title}}

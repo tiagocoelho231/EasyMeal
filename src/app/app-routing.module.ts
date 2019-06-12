@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'detalhes/:id', loadChildren: './pages/detalhes-receita/detalhes-receita.module#DetalhesReceitaPageModule' },
   { path: 'busca', loadChildren: './pages/busca/busca.module#BuscaPageModule' },
   { path: 'cadastro', loadChildren: './pages/cadastro/cadastro.module#CadastroPageModule' },
-  { path: 'conta-detalhes', loadChildren: './pages/conta-detalhes/conta-detalhes.module#ContaDetalhesPageModule' },
   { path: 'detalhes-edit/:id', loadChildren: './pages/detalhes-receita-edit/detalhes-receita-edit.module#DetalhesReceitaEditPageModule' },
 
 

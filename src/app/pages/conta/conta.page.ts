@@ -10,10 +10,17 @@ import * as firebase from 'firebase';
 })
 export class ContaPage implements OnInit {
   formValue = { email: '', password: '' };
+  title = '';
+  loggedIn = false;
 
   constructor(private afAuth: AngularFireAuth, private nav: NavController) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    firebase.auth().onAuthStateChanged( usuario => {
+      this.loggedIn = !!usuario;
+      this.title = this.loggedIn ? 'Conta' : 'Login';
+    });
+  }
 
   login() {
     const { email, password } = this.formValue;
@@ -24,4 +31,8 @@ export class ContaPage implements OnInit {
       })
       .catch(error => window.alert(error.message));
   }
+
+  logout() {
+		firebase.auth().signOut();
+	}
 }
