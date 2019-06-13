@@ -12,11 +12,17 @@ export class ContaPage implements OnInit {
   formValue = { email: '', password: '' };
   title = '';
   loggedIn = false;
+  user = {};
 
   constructor(private afAuth: AngularFireAuth, private nav: NavController) {}
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged( usuario => {
+    firebase.auth().onAuthStateChanged(usuario => {
+      if (usuario) {
+        firebase.firestore().collection('usuarios').doc(usuario.uid).get().then(resultado => {
+          this.user = resultado.data();
+        })
+      }
       this.loggedIn = !!usuario;
       this.title = this.loggedIn ? 'Conta' : 'Login';
     });
@@ -33,6 +39,8 @@ export class ContaPage implements OnInit {
   }
 
   logout() {
-		firebase.auth().signOut();
+    firebase.auth().signOut().then(() => {
+      this.loggedIn = false;
+    });
 	}
 }
