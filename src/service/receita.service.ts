@@ -6,7 +6,8 @@ import { map } from 'rxjs/operators';
 export interface Receita {
   nome: string;
   ingredientes: Array<String>;
-  preparo: string;
+  preparo: Array<String>;
+  ingredientesDetalhados: Array<String>;
   imagem: string;
 }
 
@@ -26,15 +27,15 @@ export class ReceitaService {
     this.receitasColecao = db.collection('receitas');
 
     this.receitas = this.receitasColecao.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
+      map(actions => (
+        actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
 
           //console.log("data",{id, ...data});
           return { id, ...data };
         })
-      })
+      ))
     )
   }
 

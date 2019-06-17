@@ -8,31 +8,21 @@ import { NavController } from '@ionic/angular';
   templateUrl: './adicionar-receita.page.html',
   styleUrls: ['./adicionar-receita.page.scss'],
 })
-export class AdicionarReceitaPage implements OnInit {
+export class AdicionarReceitaPage {
   receita: Receita = {
-    nome: null,
-    ingredientes: null,
-    preparo: null,
-    imagem: null
+    nome: '',
+    imagem: '',
+    ingredientes: [],
+    preparo: [],
+    ingredientesDetalhados: []
   }
   receitaId = {};
 
   noRender() {
-     //Impede o input de atualizar cada vez que um caractere é modificado
+    //Impede o input de atualizar cada vez que um caractere é modificado
   }
 
-  constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController) {
-
-  }
-
-  ngOnInit() {
-    this.receita = {
-      nome: '',
-      ingredientes: [],
-      imagem: '',
-      preparo: ''
-    };
-  }
+  constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController) {}
   
   addReceita() {
     const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}

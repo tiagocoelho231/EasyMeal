@@ -13,7 +13,7 @@
     <ion-input (input)="handleInputChange($event.target.value)"></ion-input>
   </ion-item>
 
-  <ion-card *ngFor="let receita of busca">
+  <ion-card *ngFor="let receita of busca" [routerLink]="['/detalhes', receita.id]">
     <img src="{{ receita.imagem }}">
     <ion-card-header>
       <ion-card-title>{{ receita.nome }}</ion-card-title>

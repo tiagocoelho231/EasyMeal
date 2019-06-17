@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NavController } from '@ionic/angular';
-import * as firebase from 'firebase';
+import { auth, firestore } from 'firebase';
 
 @Component({
   selector: 'app-conta',
-  templateUrl: './conta.page.html',
-  styleUrls: ['./conta.page.scss']
+  templateUrl: 'conta.page.html',
+  styleUrls: ['conta.page.scss']
 })
 export class ContaPage implements OnInit {
   formValue = { email: '', password: '' };
+  changeValues = { nome: '', password: '', confirmPassword: '' };
   title = '';
   loggedIn = false;
   user = {};
@@ -17,10 +18,11 @@ export class ContaPage implements OnInit {
   constructor(private afAuth: AngularFireAuth, private nav: NavController) {}
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged(usuario => {
+    auth().onAuthStateChanged(usuario => {
       if (usuario) {
-        firebase.firestore().collection('usuarios').doc(usuario.uid).get().then(resultado => {
-          this.user = resultado.data();
+        firestore().collection('usuarios').doc(usuario.uid).get().then(resultado => {
+          if (resultado.data())
+            this.user = resultado.data();
         })
       }
       this.loggedIn = !!usuario;
@@ -39,8 +41,12 @@ export class ContaPage implements OnInit {
   }
 
   logout() {
-    firebase.auth().signOut().then(() => {
+    auth().signOut().then(() => {
       this.loggedIn = false;
     });
-	}
+  }
+  
+  updateValues() {
+    this.nav.navigateBack('home');
+  }
 }

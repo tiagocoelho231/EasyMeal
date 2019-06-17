@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'busca.page.html',
   styleUrls: ['busca.page.scss'],
 })
-export class BuscaPage implements OnInit {
-  receitas: Receita[];
-  busca: Array<object>;
+export class BuscaPage {
+  receitas: Array<Receita> = [];
+  busca: Array<object> = [];
 
   constructor(private receitaService: ReceitaService) { }
 
@@ -23,14 +23,13 @@ export class BuscaPage implements OnInit {
     this.busca = resultado;
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
       this.receitas = retorno;
     });
   }
 
-  ngOnDestroy() {
+  ionViewWillLeave() {
     this.subscription.unsubscribe();
-  }
-
+ }
 }

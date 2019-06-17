@@ -8,15 +8,23 @@ import { NavController } from '@ionic/angular';
   templateUrl: './detalhes-receita-edit.page.html',
   styleUrls: ['./detalhes-receita-edit.page.scss'],
 })
-export class DetalhesReceitaEditPage implements OnInit {
+export class DetalhesReceitaEditPage {
   receita: Receita = {
-    nome: null,
+    nome: '',
+    imagem: '',
     ingredientes: null,
     preparo: null,
-    imagem: null
+    ingredientesDetalhados: null
   }
-  receitaId = null;
-  inputIngredientes: any;
+  receitaId = '';
+
+  tipos: Object = [
+    { name: 'ingredientes', placeholder: 'Ingrediente', title: 'Ingredientes' },
+    { name: 'ingredientesDetalhados', placeholder: 'Ingrediente Detalhado', title: 'Ingredientes Detalhados' },
+    { name: 'preparo', placeholder: 'Passo', title: 'Modo de Preparo' }
+  ]
+
+  subscription;
 
   noRender() {
      //Impede o input de atualizar cada vez que um caractere é modificado
@@ -26,17 +34,17 @@ export class DetalhesReceitaEditPage implements OnInit {
 
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.receitaId = this.route.snapshot.params['id'];
-    if (this.receitaId) {
+    if (this.receitaId)
       this.loadReceita();
-    }
+    else
+      this.nav.navigateBack('home');
   }
   
   loadReceita() {
-    this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
+    this.subscription = this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
       this.receita = retorno;
-      this.inputIngredientes = this.receita.ingredientes;
       //console.log(this.inputIngredientes);
     })
   }
@@ -44,7 +52,6 @@ export class DetalhesReceitaEditPage implements OnInit {
   updateReceita() {
     const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
     this.receitaService.updateReceita(receitaCorrigida, this.receitaId).then(() => {
-      //console.log(this.receita.ingredientes);
       this.nav.navigateBack('home');
     })
   }
@@ -55,13 +62,17 @@ export class DetalhesReceitaEditPage implements OnInit {
     })
   }
 
-  addInput() {
-    this.inputIngredientes.push('');
+  addInput(tipo) {
+    this.receita[tipo].push('');
     //console.log(this.inputIngredientes);
   }
 
-  removeInput() {
-    this.inputIngredientes.pop();
+  removeInput(tipo, i) {
+    this.receita[tipo].splice(i,1);
     //console.log(this.inputIngredientes);
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 }

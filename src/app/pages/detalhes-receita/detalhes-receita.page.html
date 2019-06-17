@@ -7,13 +7,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list lines="full">
-    <ion-item>
-      <ion-label>{{receita.nome}}</ion-label>
-    </ion-item>
-    <ion-item *ngFor="let ingrediente of inputIngredientes; let i = index" >
-      <ion-label>{{receita.ingredientes[i]}}</ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content>
+  <img src="{{receita.imagem}}" alt="{{receita.nome}}"/>
+  <div class="container">
+    <ion-button (click)="toggleFavorito()">{{textoToggleFavorito}}</ion-button>
+    <h2>{{receita.nome}}</h2>
+    <h3>Ingredientes:</h3>
+    <ol>
+      <li *ngFor="let ingrediente of ingredientes">
+        {{ingrediente}}
+      </li>
+    </ol>
+    <h3>Modo de Preparo:</h3>
+    <ol>
+      <li *ngFor="let passo of preparo">
+        {{passo}}
+      </li>
+    </ol>
+    <ion-button (click)="edit()" *ngIf="admin">Editar</ion-button>
+  </div>
 </ion-content>

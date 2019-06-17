@@ -27,29 +27,22 @@
 		</div>
 	</div>
 	<div class="container" *ngIf="loggedIn">
-		<ion-item>
-			<ion-avatar slot="start">
-				<img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-			</ion-avatar>
-			<ion-label>{{user.nome}}</ion-label>
-		</ion-item>
-		<div>
-			<form>
-				<ion-item>
-					<ion-label position="floating">Para alterar, digite seu novo nome</ion-label>
-					<ion-input name="name" type="text" ></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-label position="floating">Para alterar, Digite sua nova senha</ion-label>
-					<ion-input name="password" type="password" ></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-label position="floating">Repita sua nova senha</ion-label>
-					<ion-input name="confirmPassword" type="password" ></ion-input>
-				</ion-item>
-			</form>
-			<ion-button>Salvar alterações</ion-button>
-			<ion-button (click)="logout()">Logout</ion-button>
-		</div>
+		<form (ngSubmit)="updateValues()">
+			<ion-item>
+				<ion-label position="floating">Nome</ion-label>
+				<ion-input name="name" type="text" [(ngModel)]="changeValues.nome" value="{{user.nome}}"></ion-input>
+			</ion-item>
+			<h2>Alterar senha</h2>
+			<ion-item>
+				<ion-label position="floating">Senha</ion-label>
+				<ion-input name="password" type="password" [(ngModel)]="changeValues.password"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label position="floating">Confirme a senha</ion-label>
+				<ion-input name="confirmPassword" type="password" [(ngModel)]="changeValues.confirmPassword"></ion-input>
+			</ion-item>
+		</form>
+		<ion-button>Salvar alterações</ion-button>
+		<ion-button (click)="logout()">Logout</ion-button>
   </div>
 </ion-content>

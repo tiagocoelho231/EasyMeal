@@ -20,27 +20,32 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+}
 
-		form {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-bottom: 20px;
+h2 {
+	margin: 40px 0 0;
+	width: 100%;
+}
 
-			ion-item {
-				width: 100%;
-				font-size: 20px;
-				transition: background-color 0.3s;
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
 
-				&.item-has-focus {
-					background-color: rgba(255, 255, 255, 0.3);
-				}
-			}
+	ion-item {
+		width: 100%;
+		font-size: 20px;
+		transition: background-color 0.3s;
 
-			ion-button {
-				margin-top: 10px;
-			}
+		&.item-has-focus {
+			background-color: rgba(255, 255, 255, 0.3);
 		}
+	}
+
+	ion-button {
+		margin-top: 10px;
 	}
 }
 

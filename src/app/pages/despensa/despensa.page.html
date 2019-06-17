@@ -8,12 +8,12 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list lines="full">
-    <ion-item *ngFor="let item of ingredientes; let i = index; trackBy: noRender">
+  <ion-list lines="full" *ngIf="ingredientes.length > 0">
+    <ion-item *ngFor="let ingrediente of ingredientes; let i = index; trackBy: noRender">
       <ion-input type="text" placeholder="Ingrediente {{ i+1 }}" [(ngModel)]="ingredientes[i]"></ion-input>
+      <ion-button (click)="removeInput(i)">Remover</ion-button>
     </ion-item>
   </ion-list>
   <ion-button expand="full" (click)="addInput()">Adicionar ingrediente</ion-button>
-  <ion-button expand="full" (click)="removeInput()">Remover ingrediente</ion-button>
   <ion-button expand="full" (click)="updateDespensa()">Salvar</ion-button>
 </ion-content>

@@ -3,30 +3,39 @@ import { Receita, ReceitaService } from 'src/service/receita.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import * as firebase from 'firebase';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detalhes-receita',
   templateUrl: './detalhes-receita.page.html',
   styleUrls: ['./detalhes-receita.page.scss'],
 })
-export class DetalhesReceitaPage implements OnInit {
+export class DetalhesReceitaPage {
   receita: Receita = {
-    nome: null,
-    ingredientes: null,
-    preparo: null,
-    imagem: null
+    nome: '',
+    imagem: '',
+    ingredientes: [],
+    preparo: [],
+    ingredientesDetalhados: []
   }
-  receitaId = null;
-  inputIngredientes: any;
+  usuario: any = {
+    favoritos: []
+  };
+  receitaId = '';
+  usuarioId = '';
+  ingredientes: Array<String> = [];
+  preparo: Array<String> = [];
+  favorited: boolean = false;
+  admin: boolean = false;
+  receitaSubscription: any;
+  usuarioSubscription: any;
 
-  private id: any;
-  private admin: any;
-
-  constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController) {
+  constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController, private db: AngularFirestore) {
 
   }
 
-  ngOnInit() {
+  ionViewWillEnter () {
     this.receitaId = this.route.snapshot.params['id'];
     if (this.receitaId) {
       this.loadReceita();
@@ -34,25 +43,43 @@ export class DetalhesReceitaPage implements OnInit {
 
     firebase.auth().onAuthStateChanged((usuario) => {
       if (usuario) {
-        this.id = usuario.uid;
-
-        firebase.firestore().collection('usuarios').doc(this.id).get().then(resultado => {
-          this.admin = resultado.data().admin;
-          if (this.admin) {
-            this.nav.navigateForward("/detalhes-edit/" + this.receitaId);
-          }
-        })
+        this.usuarioId = usuario.uid;
+        this.usuarioSubscription = this.db.collection('usuarios').doc(this.usuarioId).valueChanges().subscribe(resultado => {
+          this.usuario = resultado;
+          this.admin = this.usuario.admin;
+          this.favorited = this.usuario.favoritos.indexOf(this.receitaId) >= 0;
+          this.textoToggleFavorito = this.favorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
+        });
       }
     });
-
   }
 
   loadReceita() {
-    this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
+    this.receitaSubscription = this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
       this.receita = retorno;
-      this.inputIngredientes = this.receita.ingredientes;
-      //console.log(this.inputIngredientes);
+      if (this.receita.ingredientesDetalhados)
+        this.ingredientes = this.receita.ingredientesDetalhados;
+      if (this.receita.preparo)
+        this.preparo = this.receita.preparo;
     })
   }
 
+  edit() {
+    this.nav.navigateForward(`/detalhes-edit/${this.receitaId}`);
+  }
+
+  toggleFavorito() {
+    const indexReceita = this.usuario.favoritos.indexOf(this.receitaId);
+    if (indexReceita >= 0) {
+      this.usuario.favoritos.splice(indexReceita,1);
+    } else {
+      this.usuario.favoritos.push(this.receitaId);
+    }
+    this.db.collection('usuarios').doc(this.usuarioId).update(this.usuario);
+  }
+
+  ionViewWillLeave () {
+    this.usuarioSubscription.unsubscribe();
+    this.receitaSubscription.unsubscribe();
+  }
 }

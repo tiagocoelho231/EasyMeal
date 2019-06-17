@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
+import { auth } from 'firebase';
 import { NavController } from '@ionic/angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 
-export interface Despensa {
+export interface Usuario {
   despensa: Array<String>;
 }
 
@@ -13,62 +13,59 @@ export interface Despensa {
   templateUrl: './despensa.page.html',
   styleUrls: ['./despensa.page.scss'],
 })
-export class DespensaPage implements OnInit {
+export class DespensaPage {
 
-  private usuariosColecao: AngularFirestoreCollection<Despensa>
+  private usuariosColecao: AngularFirestoreCollection<Usuario>
   private id: any;
-  private usuario: Despensa = {
-    despensa: ['']
+  private usuario: Usuario = {
+    despensa: []
   };
-  public ingredientes: any;
+  public ingredientes: Array<String> = [];
+  subscription;
 
   constructor(private nav: NavController, private db: AngularFirestore) {
     this.usuariosColecao = this.db.collection('usuarios');
   }
 
-  ngOnInit() {
-    firebase.auth().onAuthStateChanged((usuario) => {
+  ionViewWillEnter () {
+    auth().onAuthStateChanged((usuario) => {
       if (usuario) {
         this.id = usuario.uid;
-        this.loadDespensa(this.id);
+        this.loadDespensa();
       } else {
         this.nav.navigateForward("conta");
       }
     });
   }
 
-  loadDespensa(id: any) {
-    firebase.firestore().collection('usuarios').doc(id).get().then(resultado => {
-      this.ingredientes = resultado.data().despensa;
-
-      this.usuariosColecao.doc<Despensa>(id).valueChanges().subscribe(retorno => {
-        this.usuario = retorno;
+  loadDespensa() {
+    this.subscription = this.usuariosColecao.doc<Usuario>(this.id).valueChanges().subscribe(retorno => {
+      this.usuario = retorno;
+      if (this.usuario.despensa)
         this.ingredientes = this.usuario.despensa;
-      })
-    }).catch(() => {
-      firebase.firestore().collection('usuarios').doc(id).set(this.usuario).then(() => {
-        location.reload();
-      })
     })
   }
+  
 
   updateDespensa() {
-    const correctedUsuario = {...this.usuario, despensa: this.usuario.despensa.map(i => i.toLowerCase())};
-    firebase.firestore().collection('usuarios').doc(this.id).update(correctedUsuario);
+    const correctedUsuario = {...this.usuario, despensa: this.ingredientes.map(i => i.toLowerCase())};
+    this.usuariosColecao.doc(this.id).update(correctedUsuario);
   }
 
   addInput() {
     this.ingredientes.push('');
-    //console.log(this.inputIngredientes);
+    console.log(this.ingredientes)
   }
 
-  removeInput() {
-    this.ingredientes.pop();
-    //console.log(this.inputIngredientes);
+  removeInput(i) {
+    this.ingredientes.splice(i,1);
   }
 
   noRender() {
     //Impede o input de atualizar cada vez que um caractere é modificado
   }
 
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
+  }
 }
