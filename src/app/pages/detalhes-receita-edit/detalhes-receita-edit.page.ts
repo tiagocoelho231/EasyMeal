@@ -16,6 +16,7 @@ export class DetalhesReceitaEditPage {
     preparo: null,
     ingredientesDetalhados: null
   }
+  
   receitaId = '';
 
   tipos: Object = [
@@ -52,7 +53,7 @@ export class DetalhesReceitaEditPage {
   updateReceita() {
     const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
     this.receitaService.updateReceita(receitaCorrigida, this.receitaId).then(() => {
-      this.nav.navigateBack('home');
+      this.nav.navigateBack(`/detalhes/${this.receitaId}`);
     })
   }
   
@@ -64,12 +65,10 @@ export class DetalhesReceitaEditPage {
 
   addInput(tipo) {
     this.receita[tipo].push('');
-    //console.log(this.inputIngredientes);
   }
 
   removeInput(tipo, i) {
     this.receita[tipo].splice(i,1);
-    //console.log(this.inputIngredientes);
   }
 
   ionViewWillLeave() {

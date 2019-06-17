@@ -30,6 +30,7 @@ export class DetalhesReceitaPage {
   admin: boolean = false;
   receitaSubscription: any;
   usuarioSubscription: any;
+  textoToggleFavorito: string = 'Adicionar aos favoritos'
 
   constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController, private db: AngularFirestore) {
 

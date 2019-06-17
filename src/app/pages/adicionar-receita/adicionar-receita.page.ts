@@ -12,11 +12,18 @@ export class AdicionarReceitaPage {
   receita: Receita = {
     nome: '',
     imagem: '',
-    ingredientes: [],
-    preparo: [],
-    ingredientesDetalhados: []
+    ingredientes: [''],
+    preparo: [''],
+    ingredientesDetalhados: ['']
   }
+
   receitaId = {};
+
+  tipos: Object = [
+    { name: 'ingredientes', placeholder: 'Ingrediente', title: 'Ingredientes' },
+    { name: 'ingredientesDetalhados', placeholder: 'Ingrediente Detalhado', title: 'Ingredientes Detalhados' },
+    { name: 'preparo', placeholder: 'Passo', title: 'Modo de Preparo' }
+  ]
 
   noRender() {
     //Impede o input de atualizar cada vez que um caractere é modificado
@@ -26,17 +33,17 @@ export class AdicionarReceitaPage {
   
   addReceita() {
     const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
-    this.receitaService.addReceita(receitaCorrigida);
-    this.nav.navigateBack('home');
+    this.receitaService.addReceita(receitaCorrigida).then(resultado => {
+      this.nav.navigateBack(`/detalhes/${resultado.id}`);
+    });
+    
   }
 
-  addInput() {
-    this.receita.ingredientes.push('');
-    console.log(this.receita.ingredientes);
+  addInput(tipo) {
+    this.receita[tipo].push('');
   }
 
-  removeInput() {
-    this.receita.ingredientes.pop();
-    console.log(this.receita.ingredientes);
+  removeInput(tipo, i) {
+    this.receita[tipo].splice(i,1);
   }
 }
