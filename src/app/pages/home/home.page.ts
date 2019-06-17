@@ -46,12 +46,12 @@ export class HomePage {
   }
 
   updateList () {
-    this.textoToggleShowAll = this.showAll ? 'Listar por ingredientes da despensa' : 'Listar todas as receitas';
+    this.textoToggleShowAll = this.showAll ? 'Filtrar por despensa' : 'Listar todas as receitas';
     this.show = [];
     if (this.showAll) {
       this.show = this.receitas;
     } else {
-      this.show = this.receitas.filter(r => r.ingredientes.every(i => this.despensa.indexOf(i) >= 0))
+      this.show = this.receitas.filter(r => r.ingredientes.every(i => this.despensa.includes(i)))
     }
   }
   

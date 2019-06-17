@@ -48,7 +48,7 @@ export class DetalhesReceitaPage {
         this.usuarioSubscription = this.db.collection('usuarios').doc(this.usuarioId).valueChanges().subscribe(resultado => {
           this.usuario = resultado;
           this.admin = this.usuario.admin;
-          this.favorited = this.usuario.favoritos.indexOf(this.receitaId) >= 0;
+          this.favorited = this.usuario.favoritos.includes(this.receitaId);
           this.textoToggleFavorito = this.favorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
         });
       }

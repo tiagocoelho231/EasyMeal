@@ -18,7 +18,7 @@ export class BuscaPage {
     let resultado = this.receitas;
     const buscados = value.toLowerCase().split(' ');
     buscados.forEach(ingrediente => {
-      resultado = resultado.filter(receita => receita.ingredientes.indexOf(ingrediente) > -1);
+      resultado = resultado.filter(receita => receita.ingredientes.includes(ingrediente));
     });
     this.busca = resultado;
   }

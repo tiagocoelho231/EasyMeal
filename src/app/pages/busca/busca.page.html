@@ -12,13 +12,13 @@
     <ion-label position="floating">Insira os nomes dos ingredientes</ion-label>
     <ion-input (input)="handleInputChange($event.target.value)"></ion-input>
   </ion-item>
-
-  <ion-card *ngFor="let receita of busca" [routerLink]="['/detalhes', receita.id]">
-    <img src="{{ receita.imagem }}">
-    <ion-card-header>
-      <ion-card-title>{{ receita.nome }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>{{ receita.descricao }}</ion-card-content>
-  </ion-card>
-
+  <div class="card-background-page">
+    <ion-card *ngFor="let receita of busca" [routerLink]="['/detalhes', receita.id]">
+      <img src="{{ receita.imagem }}">
+      <ion-card-header>
+        <ion-card-title>{{ receita.nome }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>{{ receita.descricao }}</ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

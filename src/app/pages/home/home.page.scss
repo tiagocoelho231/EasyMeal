@@ -2,13 +2,16 @@ ion-content > div {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 }
 
 .card-background-page {
-  padding: 20px;
+  margin-top: 20px;
 
-  ion-card { 
+  ion-card {
     margin: 0 0 20px 0;
+    min-height: 200px;
+    width: 100%;
 
     &:last-of-type {
       margin-bottom: 0;
