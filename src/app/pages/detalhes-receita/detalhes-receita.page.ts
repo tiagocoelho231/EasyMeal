@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Receita, ReceitaService } from 'src/service/receita.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import * as firebase from 'firebase';
+import { auth } from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detalhes-receita',
@@ -42,7 +41,7 @@ export class DetalhesReceitaPage {
       this.loadReceita();
     }
 
-    firebase.auth().onAuthStateChanged((usuario) => {
+    auth().onAuthStateChanged((usuario) => {
       if (usuario) {
         this.usuarioId = usuario.uid;
         this.usuarioSubscription = this.db.collection('usuarios').doc(this.usuarioId).valueChanges().subscribe(resultado => {

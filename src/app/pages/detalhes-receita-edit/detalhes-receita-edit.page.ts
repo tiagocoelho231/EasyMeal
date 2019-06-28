@@ -37,10 +37,7 @@ export class DetalhesReceitaEditPage {
 
   ionViewWillEnter() {
     this.receitaId = this.route.snapshot.params['id'];
-    if (this.receitaId)
-      this.loadReceita();
-    else
-      this.nav.navigateBack('home');
+    this.loadReceita();
   }
   
   loadReceita() {
