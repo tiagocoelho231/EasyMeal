@@ -34,7 +34,6 @@ export class ContaPage implements OnInit {
     const { email, password } = this.formValue;
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('Usuário logado');
         this.nav.navigateForward('home');
       })
       .catch(error => window.alert(error.message));

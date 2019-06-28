@@ -46,7 +46,6 @@ export class DetalhesReceitaEditPage {
   loadReceita() {
     this.subscription = this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
       this.receita = retorno;
-      //console.log(this.inputIngredientes);
     })
   }
 

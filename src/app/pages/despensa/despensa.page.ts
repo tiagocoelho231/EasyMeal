@@ -54,7 +54,6 @@ export class DespensaPage {
 
   addInput() {
     this.ingredientes.push('');
-    console.log(this.ingredientes)
   }
 
   removeInput(i) {
