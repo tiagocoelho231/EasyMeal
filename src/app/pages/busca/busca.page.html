@@ -12,6 +12,7 @@
     <ion-label position="floating">Insira os nomes dos ingredientes</ion-label>
     <ion-input (input)="handleInputChange($event.target.value)"></ion-input>
   </ion-item>
+  <ion-note padding>Separar ingredientes por vírgula</ion-note>
   <div class="card-background-page">
     <ion-card *ngFor="let receita of busca" [routerLink]="['/detalhes', receita.id]">
       <img src="{{ receita.imagem }}">

@@ -16,9 +16,10 @@ export class BuscaPage {
 
   handleInputChange (value) {
     let resultado = this.receitas;
-    const buscados = value.toLowerCase().split(' ');
+    const buscados = value.toLowerCase().split(',').map(i => i.trim());
     buscados.forEach(ingrediente => {
-      resultado = resultado.filter(receita => receita.ingredientes.includes(ingrediente));
+      if (ingrediente)
+        resultado = resultado.filter(receita => receita.ingredientes.includes(ingrediente));
     });
     this.busca = resultado;
   }
