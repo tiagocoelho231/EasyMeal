@@ -25,7 +25,7 @@ export class CadastroPage implements OnInit {
       this.afAuth.auth
         .createUserWithEmailAndPassword(email, password)
         .then(response => {
-          this.db.collection('usuarios').doc(response.user.uid).set({ nome: name, admin: false, favoritos: '' });
+          this.db.collection('usuarios').doc(response.user.uid).set({ nome: name, admin: false, despensa: [], favoritos: [] });
           window.alert('Cadastrado com sucesso');
           this.nav.navigateBack('conta');
         })
