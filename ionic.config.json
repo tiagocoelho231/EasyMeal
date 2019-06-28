@@ -1,5 +1,7 @@
 {
   "name": "EasyMeal",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
