@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReceitaService, Receita } from 'src/service/receita.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-adicionar-receita',
@@ -17,6 +18,8 @@ export class AdicionarReceitaPage {
     ingredientesDetalhados: ['']
   }
 
+  usuario = null;
+
   receitaId = {};
 
   tipos: Object = [
@@ -31,6 +34,12 @@ export class AdicionarReceitaPage {
 
   constructor(private receitaService: ReceitaService, private route: ActivatedRoute, private nav: NavController) {}
   
+  ionViewDidEnter() {
+    auth().onAuthStateChanged(usuario => {
+      if (!usuario) this.nav.navigateBack("conta");
+    })
+  }
+
   addReceita() {
     const receitaCorrigida = {...this.receita, ingredientes: this.receita.ingredientes.map(item => item.toLowerCase())}
     this.receitaService.addReceita(receitaCorrigida).then(resultado => {

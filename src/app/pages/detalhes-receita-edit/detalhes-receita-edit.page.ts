@@ -1,5 +1,5 @@
 import { ReceitaService, Receita } from './../../../service/receita.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
@@ -35,7 +35,7 @@ export class DetalhesReceitaEditPage {
 
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.receitaId = this.route.snapshot.params['id'];
     if (this.receitaId)
       this.loadReceita();
@@ -46,7 +46,6 @@ export class DetalhesReceitaEditPage {
   loadReceita() {
     this.subscription = this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
       this.receita = retorno;
-      //console.log(this.inputIngredientes);
     })
   }
 
@@ -58,9 +57,14 @@ export class DetalhesReceitaEditPage {
   }
   
   removeReceita() {
+    this.subscription.unsubscribe();
     this.receitaService.removeReceita(this.receitaId).then(() => {
       this.nav.navigateBack('home');
-    })
+    }).catch(() => {
+      this.subscription = this.receitaService.getReceita(this.receitaId).subscribe(retorno => {
+        this.receita = retorno;
+      })
+    });
   }
 
   addInput(tipo) {
@@ -72,6 +76,6 @@ export class DetalhesReceitaEditPage {
   }
 
   ionViewWillLeave() {
-    this.subscription.unsubscribe();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 }

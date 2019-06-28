@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NavController } from '@ionic/angular';
@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss']
 })
-export class CadastroPage implements OnInit {
+export class CadastroPage {
   formValue = { name: '', email: '', password: '', confirmPassword: '' };
 
   constructor(
@@ -16,8 +16,6 @@ export class CadastroPage implements OnInit {
     private nav: NavController,
     private db: AngularFirestore
   ) {}
-
-  ngOnInit() {}
 
   signUp() {
     const { name, email, password, confirmPassword } = this.formValue;

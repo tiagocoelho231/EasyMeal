@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Receita, ReceitaService } from 'src/service/receita.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import * as firebase from 'firebase';
+import { auth } from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detalhes-receita',
@@ -36,13 +35,13 @@ export class DetalhesReceitaPage {
 
   }
 
-  ionViewWillEnter () {
+  ionViewDidEnter () {
     this.receitaId = this.route.snapshot.params['id'];
     if (this.receitaId) {
       this.loadReceita();
     }
 
-    firebase.auth().onAuthStateChanged((usuario) => {
+    auth().onAuthStateChanged(usuario => {
       if (usuario) {
         this.usuarioId = usuario.uid;
         this.usuarioSubscription = this.db.collection('usuarios').doc(this.usuarioId).valueChanges().subscribe(resultado => {
@@ -51,6 +50,8 @@ export class DetalhesReceitaPage {
           this.favorited = this.usuario.favoritos.includes(this.receitaId);
           this.textoToggleFavorito = this.favorited ? 'Remover dos favoritos' : 'Adicionar aos favoritos';
         });
+      } else {
+        this.nav.navigateBack("conta");
       }
     });
   }
@@ -80,7 +81,7 @@ export class DetalhesReceitaPage {
   }
 
   ionViewWillLeave () {
-    this.usuarioSubscription.unsubscribe();
-    this.receitaSubscription.unsubscribe();
+    if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
+    if (this.receitaSubscription) this.receitaSubscription.unsubscribe();
   }
 }

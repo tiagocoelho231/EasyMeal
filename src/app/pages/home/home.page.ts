@@ -1,7 +1,7 @@
 import { Receita, ReceitaService } from '../../../service/receita.service';
 import { auth, firestore } from 'firebase';
 import { NavController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -20,20 +20,18 @@ export class HomePage {
   
   private subscription;
 
-  ionViewWillEnter() {
-    this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
-      this.receitas = retorno;
-      this.updateList();
-    });
+  ionViewDidEnter() {
     auth().onAuthStateChanged(usuario => {
       if (usuario) {
         firestore().collection('usuarios').doc(usuario.uid).get().then(resultado => {
-          if (resultado.data()){
-            this.user = resultado.data();
-            if (this.user.despensa)
-              this.despensa = this.user.despensa;
-          }
+          this.user = resultado.data();
+          if (this.user.despensa)
+            this.despensa = this.user.despensa;
         })
+        this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
+          this.receitas = retorno;
+          this.updateList();
+        });
       } else {
         this.nav.navigateBack('conta');
       }
@@ -56,6 +54,6 @@ export class HomePage {
   }
   
   ionViewWillLeave() {
-    this.subscription.unsubscribe();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 }

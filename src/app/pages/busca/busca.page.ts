@@ -1,5 +1,7 @@
 import { Receita, ReceitaService } from '../../../service/receita.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { auth } from 'firebase';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-busca',
@@ -9,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
 export class BuscaPage {
   receitas: Array<Receita> = [];
   busca: Array<object> = [];
+  usuario = null;
 
-  constructor(private receitaService: ReceitaService) { }
+  constructor(private receitaService: ReceitaService, private nav: NavController) { }
 
   private subscription;
 
@@ -24,13 +27,19 @@ export class BuscaPage {
     this.busca = resultado;
   }
 
-  ionViewWillEnter() {
-    this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
-      this.receitas = retorno;
-    });
+  ionViewDidEnter() {
+    auth().onAuthStateChanged(usuario => {
+      if (usuario) {
+        this.subscription = this.receitaService.getReceitas().subscribe(retorno => {
+          this.receitas = retorno;
+        });
+      } else {
+        this.nav.navigateBack('conta');
+      }
+    })
   }
 
   ionViewWillLeave() {
-    this.subscription.unsubscribe();
- }
+    if (this.subscription) this.subscription.unsubscribe();
+  }
 }

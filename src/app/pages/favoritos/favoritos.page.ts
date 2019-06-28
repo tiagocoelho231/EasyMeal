@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import * as firebase from 'firebase';
+import { Component } from '@angular/core';
+import { auth } from 'firebase';
 import { ReceitaService, Receita } from 'src/service/receita.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators'
-import { Observable } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-favoritos',
@@ -15,31 +14,34 @@ export class FavoritosPage {
   receitas: Array<any> = [];
   show: Array<Receita> = [];
 
-  constructor(private receitaService: ReceitaService, private db: AngularFirestore){}
+  constructor(private receitaService: ReceitaService, private db: AngularFirestore, private nav: NavController){}
   
   private receitasSubscription;
   private usuarioSubscription;
   private id: any;
   
 
-  ionViewWillEnter(){
-    this.receitasSubscription = this.receitaService.getReceitas().subscribe(retorno => {
-      this.receitas = retorno;
-    });
-    firebase.auth().onAuthStateChanged(usuario => {
-      if (usuario)
+  ionViewDidEnter(){
+    auth().onAuthStateChanged(usuario => {
+      if (usuario) {
         this.id = usuario.uid;
-      this.usuarioSubscription = this.db.collection('usuarios').doc<any>(this.id).valueChanges().subscribe(retorno => {
-        this.show = [];
-        if (retorno.favoritos)
-          this.favoritos = retorno.favoritos;
-        this.favoritos.forEach(f => this.show.push(...this.receitas.filter(receita => receita.id === f)));
-      })
+        this.receitasSubscription = this.receitaService.getReceitas().subscribe(retorno => {
+          this.receitas = retorno;
+        });
+        this.usuarioSubscription = this.db.collection('usuarios').doc<any>(this.id).valueChanges().subscribe(usuario => {
+          this.show = [];
+          if (usuario.favoritos) 
+            this.favoritos = usuario.favoritos;
+          this.favoritos.forEach(f => this.show.push(...this.receitas.filter(receita => receita.id === f)));
+        })
+      } else {
+        this.nav.navigateBack('conta');
+      }
     })
   };
   
   ionViewWillLeave() {
-    this.receitasSubscription.unsubscribe();
-    this.usuarioSubscription.unsubscribe();
+    if (this.receitasSubscription) this.receitasSubscription.unsubscribe();
+    if (this.usuarioSubscription) this.usuarioSubscription.unsubscribe();
  }
 }

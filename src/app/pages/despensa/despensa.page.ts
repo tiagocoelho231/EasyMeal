@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { auth } from 'firebase';
 import { NavController } from '@ionic/angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
@@ -27,13 +27,13 @@ export class DespensaPage {
     this.usuariosColecao = this.db.collection('usuarios');
   }
 
-  ionViewWillEnter () {
-    auth().onAuthStateChanged((usuario) => {
+  ionViewDidEnter () {
+    auth().onAuthStateChanged(usuario => {
       if (usuario) {
         this.id = usuario.uid;
         this.loadDespensa();
       } else {
-        this.nav.navigateForward("conta");
+        this.nav.navigateBack("conta");
       }
     });
   }
@@ -54,7 +54,6 @@ export class DespensaPage {
 
   addInput() {
     this.ingredientes.push('');
-    console.log(this.ingredientes)
   }
 
   removeInput(i) {
@@ -66,6 +65,6 @@ export class DespensaPage {
   }
 
   ionViewWillLeave() {
-    this.subscription.unsubscribe();
+    if (this.subscription) this.subscription.unsubscribe();
   }
 }
