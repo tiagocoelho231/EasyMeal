@@ -38,7 +38,7 @@
     "core-js": "^2.5.4",
     "firebase": "^5.9.2",
     "fstream": "^1.0.12",
-    "handlebars": "^4.2.0",
+    "handlebars": "^4.5.3",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "mixin-deep": "^2.0.1",
